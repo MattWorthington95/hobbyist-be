@@ -2,8 +2,10 @@ const dotenv = require('dotenv');
 const express = require('express');
 const cors = require('cors');
 const apiRouter = require('./routes/api.router');
+const connectDB = require('./db/db');
 
 dotenv.config({ path: 'server/config/config.env' });
+connectDB();
 
 const app = express();
 
