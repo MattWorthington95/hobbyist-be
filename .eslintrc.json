@@ -13,6 +13,10 @@
     "sourceType": "module"
   },
   "rules": {
-    "quotes": ["error", "single"]
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "semi": [2, "always"],
+    "comma-dangle": [2, "never"],
+    "no-unused-vars": 1
   }
 }
