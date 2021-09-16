@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {LocationSchema} = require('./Location');
+const { LocationSchema } = require('./Location');
 
 const ClubSchema = new mongoose.Schema({
   clubName: {
@@ -16,7 +16,14 @@ const ClubSchema = new mongoose.Schema({
   ageGroup: {
     type: String,
     required: [true, 'Please choose the age group available'],
-    enum: ['toddler', 'pre-school', 'primary-school', 'secondary', 'young adult', 'adult']
+    enum: [
+      'toddler',
+      'pre-school',
+      'primary-school',
+      'secondary',
+      'young adult',
+      'adult'
+    ]
   },
   level: {
     type: String,
@@ -30,11 +37,12 @@ const ClubSchema = new mongoose.Schema({
   address: {
     buildingNumber: {
       type: [Number, String],
-      required: [true, 'enter building number']},
+      required: [true, 'enter building number']
+    },
     street: String,
     town: String,
     postcode: {
-      type: String, 
+      type: String,
       required: [true, 'enter postcode']
     }
   },
@@ -53,16 +61,16 @@ const ClubSchema = new mongoose.Schema({
     required: true
   },
   hours: {
-    monday: {open: Number, close: Number},
-    tuesday: {open: Number, close: Number},
-    wednesday: {open: Number, close: Number},
-    thursday: {open: Number, close: Number},
-    friday: {open: Number, close: Number},
-    saturday: {open: Number, close: Number},
-    sunday: {open: Number, close: Number}
+    monday: { open: Number, close: Number },
+    tuesday: { open: Number, close: Number },
+    wednesday: { open: Number, close: Number },
+    thursday: { open: Number, close: Number },
+    friday: { open: Number, close: Number },
+    saturday: { open: Number, close: Number },
+    sunday: { open: Number, close: Number }
   }
 });
 
 const Club = mongoose.model('club', ClubSchema);
 
-module.exports = {Club, ClubSchema};
+module.exports = { Club, ClubSchema };
