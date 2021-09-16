@@ -16,7 +16,7 @@ const seedUsers = async () => {
           password: faker.internet.password(),
           address: {
             buildingNumber: faker.datatype.number(300),
-            postcode: 'M4 7BH'
+            postcode: faker.address.zipCode()
           },
           imageURL: faker.internet.avatar(),
           email: faker.internet.email(),
