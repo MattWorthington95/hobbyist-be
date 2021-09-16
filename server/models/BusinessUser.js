@@ -3,7 +3,7 @@ const { ClubSchema } = require('./Club');
 const { LocationSchema } = require('./Location');
 
 const BusinessUserSchema = new mongoose.Schema({
-  userName: {
+  username: {
     type: String,
     required: true,
     unique: true,
@@ -29,7 +29,7 @@ const BusinessUserSchema = new mongoose.Schema({
   name: String,
   address: {
     buildingNumber: {
-      type: [Number, String],
+      type: Number,
       required: [true, 'enter building number']
     },
     street: String,
@@ -42,7 +42,7 @@ const BusinessUserSchema = new mongoose.Schema({
   location: LocationSchema,
   imageURL: String,
   clubs: [ClubSchema],
-  review: [{ userName: String, body: String }]
+  reviews: [{ username: String, body: String }]
 });
 
 const BusinessUser = mongoose.model('businessUser', BusinessUserSchema);
