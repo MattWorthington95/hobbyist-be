@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
   },
   address: {
     buildingNumber: {
-      type: [Number, String]
+      type: Number
     },
     street: String,
     town: String,
