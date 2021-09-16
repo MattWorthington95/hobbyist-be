@@ -36,7 +36,7 @@ const ClubSchema = new mongoose.Schema({
   },
   address: {
     buildingNumber: {
-      type: [Number, String],
+      type: Number,
       required: [true, 'enter building number']
     },
     street: String,
