@@ -3,7 +3,7 @@ const BusinessUser = require('../models/BusinessUser');
 const User = require('../models/User');
 const { Club } = require('../models/Club');
 const { randomiseHours } = require('../utils/utils');
-const App = require('../app');
+require('../app');
 
 const seedUsers = async () => {
   try {
