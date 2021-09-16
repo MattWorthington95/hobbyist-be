@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 
-
 const LocationSchema = new mongoose.Schema({
   name: String,
   location: {
     type: {
-      type: String, 
+      type: String,
       enum: ['Point']
     },
     coordinates: {
@@ -16,4 +15,4 @@ const LocationSchema = new mongoose.Schema({
 
 const Location = mongoose.model('location', LocationSchema);
 
-module.export = {Location, LocationSchema};
+module.exports = { Location, LocationSchema };

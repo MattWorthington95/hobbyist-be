@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const {ClubSchema} = require('./Club');
-const {LocationSchema} = require('./Location');
+const { ClubSchema } = require('./Club');
+const { LocationSchema } = require('./Location');
 
 const BusinessUserSchema = new mongoose.Schema({
   userName: {
@@ -30,20 +30,21 @@ const BusinessUserSchema = new mongoose.Schema({
   address: {
     buildingNumber: {
       type: [Number, String],
-      required: [true, 'enter building number']},
+      required: [true, 'enter building number']
+    },
     street: String,
     town: String,
     postcode: {
-      type: String, 
+      type: String,
       required: [true, 'enter postcode']
-    }  
+    }
   },
   location: LocationSchema,
   imageURL: String,
   clubs: [ClubSchema],
-  review: [{userName: String, body: String }]
+  review: [{ userName: String, body: String }]
 });
 
 const BusinessUser = mongoose.model('businessUser', BusinessUserSchema);
 
-module.export = BusinessUser;
+module.exports = BusinessUser;

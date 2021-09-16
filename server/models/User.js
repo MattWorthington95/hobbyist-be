@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {LocationSchema} = require('./Location');
+const { LocationSchema } = require('./Location');
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -22,9 +22,9 @@ const UserSchema = new mongoose.Schema({
     street: String,
     town: String,
     postcode: {
-      type: String, 
+      type: String,
       required: [true, 'enter postcode']
-    }  
+    }
   },
   location: LocationSchema,
   imageURL: String,
@@ -42,4 +42,4 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('user', UserSchema);
 
-module.export = User;
+module.exports = User;
