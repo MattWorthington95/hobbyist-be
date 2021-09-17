@@ -33,6 +33,8 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^6.0.5"
+    "mongoose": "^6.0.5",
+    "node-geocoder": "^3.27.0",
+    "node-open-geocoder": "^4.0.1"
   }
 }

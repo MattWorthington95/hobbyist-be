@@ -70,10 +70,15 @@ const seedClubs = async () => {
 };
 
 const seedBusinessUsers = async () => {
+  const addresses = [
+    { firstLine: '2 Booth St E', postcode: 'M13 9SS' },
+    { firstLine: 'Moss Ln E', postcode: 'M15 5NN' },
+    { firstLine: 'Great Cheetham St W', postcode: 'M7 2DN' }
+  ];
   try {
     const businessUsers = [];
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 3; i++) {
       const clubData = await seedClubs();
       businessUsers.push(
         new BusinessUser({
@@ -84,8 +89,12 @@ const seedBusinessUsers = async () => {
           website: faker.internet.url(),
           name: faker.company.companyName(),
           address: {
-            buildingNumber: faker.datatype.number(300),
-            postcode: faker.address.zipCode()
+            firstLine: `${addresses[i].firstLine} ${addresses[i].postcode}`,
+            postcode: addresses[i].postcode
+          },
+          location: {
+            type: 'Point',
+            coorditates: []
           },
           imageURL: faker.internet.avatar(),
           clubs: [clubData],
@@ -106,10 +115,10 @@ const seedBusinessUsers = async () => {
       BusinessUser.create(businessUser);
     });
     console.log('Saved!');
+    console.log(businessUsers);
   } catch (err) {
     console.log(err);
   }
 };
-
 seedBusinessUsers();
 seedUsers();
