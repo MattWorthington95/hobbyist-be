@@ -3,6 +3,7 @@ const BusinessUser = require('../models/BusinessUser');
 const User = require('../models/User');
 const { Club } = require('../models/Club');
 const { randomiseHours } = require('../utils/utils');
+const addresses = require('../db/data/addresses');
 require('../app');
 
 const seedUsers = async () => {
@@ -70,15 +71,10 @@ const seedClubs = async () => {
 };
 
 const seedBusinessUsers = async () => {
-  const addresses = [
-    { firstLine: '2 Booth St E', postcode: 'M13 9SS' },
-    { firstLine: 'Moss Ln E', postcode: 'M15 5NN' },
-    { firstLine: 'Great Cheetham St W', postcode: 'M7 2DN' }
-  ];
   try {
     const businessUsers = [];
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < addresses.length; i++) {
       const clubData = await seedClubs();
       businessUsers.push(
         new BusinessUser({
@@ -89,12 +85,11 @@ const seedBusinessUsers = async () => {
           website: faker.internet.url(),
           name: faker.company.companyName(),
           address: {
-            firstLine: `${addresses[i].firstLine} ${addresses[i].postcode}`,
+            firstLine: addresses[i].firstLine,
             postcode: addresses[i].postcode
           },
           location: {
-            type: 'Point',
-            coorditates: []
+            type: 'Point'
           },
           imageURL: faker.internet.avatar(),
           clubs: [clubData],
@@ -111,11 +106,9 @@ const seedBusinessUsers = async () => {
         })
       );
     }
-    await businessUsers.forEach((businessUser) => {
+    businessUsers.forEach((businessUser) => {
       BusinessUser.create(businessUser);
     });
-    console.log('Saved!');
-    console.log(businessUsers);
   } catch (err) {
     console.log(err);
   }
