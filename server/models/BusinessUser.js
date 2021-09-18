@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { ClubSchema } = require('./Club');
-const { LocationSchema } = require('./Location');
 const geocoder = require('../utils/geocoder.js');
 
 const BusinessUserSchema = new mongoose.Schema({
@@ -54,15 +53,8 @@ const BusinessUserSchema = new mongoose.Schema({
   reviews: [{ username: String, body: String }]
 });
 
-BusinessUserSchema.pre('save', async function(next) {
-  const location = await geocoder.geocode(this.address.firstLine);
-  this.location = {
-    type:  'Point',
-    coordinates: [location[0].longitude, location[0].latitude],
-    formattedAddress: location[0].formattedAddress
-  };
-  this.address = undefined;
-  next();
+BusinessUserSchema.post('save', function () {
+  geocoder(this);
 });
 
 const BusinessUser = mongoose.model('businessUser', BusinessUserSchema);
