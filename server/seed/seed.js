@@ -3,7 +3,7 @@ const BusinessUser = require('../models/BusinessUser');
 const User = require('../models/User');
 const { Club } = require('../models/Club');
 const { randomiseHours } = require('../utils/utils');
-const clubAddresses = require('../db/data/addresses');
+const { clubAddresses } = require('../db/data/addresses');
 require('../app');
 
 /**
