@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { ClubSchema } = require('./Club');
-const { LocationSchema } = require('./Location');
+const geocoder = require('../utils/geocoder.js');
 
 const BusinessUserSchema = new mongoose.Schema({
   username: {
@@ -28,21 +28,33 @@ const BusinessUserSchema = new mongoose.Schema({
   },
   name: String,
   address: {
-    buildingNumber: {
-      type: Number,
-      required: [true, 'enter building number']
+    firstLine: {
+      type: String,
+      required: [true, 'enter your first line of address']
     },
-    street: String,
     town: String,
     postcode: {
       type: String,
       required: [true, 'enter postcode']
     }
   },
-  location: LocationSchema,
+  location: {
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: {
+      type: [Number]
+    },
+    formattedAddress: String
+  },
   imageURL: String,
   clubs: [ClubSchema],
   reviews: [{ username: String, body: String }]
+});
+
+BusinessUserSchema.post('save', function () {
+  geocoder(this);
 });
 
 const BusinessUser = mongoose.model('businessUser', BusinessUserSchema);

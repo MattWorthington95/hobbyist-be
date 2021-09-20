@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { LocationSchema } = require('./Location');
+const geocoder = require('../utils/geocoder.js');
 
 const ClubSchema = new mongoose.Schema({
   clubName: {
@@ -35,18 +35,26 @@ const ClubSchema = new mongoose.Schema({
     required: [true, 'Please enter the price per session']
   },
   address: {
-    buildingNumber: {
-      type: Number,
-      required: [true, 'enter building number']
+    firstLine: {
+      type: String,
+      required: [true, 'enter your first line of address']
     },
-    street: String,
     town: String,
     postcode: {
       type: String,
       required: [true, 'enter postcode']
     }
   },
-  location: LocationSchema,
+  location: {
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: {
+      type: [Number]
+    },
+    formattedAddress: String
+  },
   website: {
     type: String,
     trim: true
@@ -69,6 +77,10 @@ const ClubSchema = new mongoose.Schema({
     saturday: { open: Number, close: Number },
     sunday: { open: Number, close: Number }
   }
+});
+
+ClubSchema.post('save', function () {
+  geocoder(this);
 });
 
 const Club = mongoose.model('club', ClubSchema);
