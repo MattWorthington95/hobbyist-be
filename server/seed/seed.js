@@ -3,8 +3,10 @@ const BusinessUser = require('../models/BusinessUser');
 const User = require('../models/User');
 const { Club } = require('../models/Club');
 const { randomiseHours } = require('../utils/utils');
-const { clubAddresses, userAddresses } = require('../db/data/addresses');
 require('../app');
+const dataPath = process.env.NODE_ENV === 'test' ? 'testData' : 'data';
+console.log(dataPath);
+const { clubAddresses, userAddresses } = require(`../db/${dataPath}/addresses`);
 
 /**
  * Function to prevent 429 Error -
@@ -40,8 +42,7 @@ const seedUsers = async () => {
     }
     for (let user of users) {
       await Promise.all([sleep(1000), User.create(user)]);
-      console.log(user);
-      console.log('Saved users');
+      console.log('created user');
     }
   } catch (error) {
     console.log(error);
@@ -78,6 +79,7 @@ const seedClubs = async (clubAddress) => {
       hours: randomiseHours()
     });
     await Promise.all([sleep(1000), Club.create(newClub)]);
+    console.log('club created');
     return newClub;
   } catch (err) {
     console.log(err);
@@ -126,5 +128,14 @@ const seedBusinessUsers = async () => {
     console.log(err);
   }
 };
-// seedBusinessUsers();
-seedUsers();
+
+const seedData = async () => {
+  await BusinessUser.remove();
+  await User.remove();
+
+  const businessUserResponse = await seedBusinessUsers();
+  const userResponse = await seedUsers();
+  return [businessUserResponse, userResponse];
+};
+
+module.exports = seedData;
