@@ -3,7 +3,7 @@ const BusinessUser = require('../models/BusinessUser');
 const User = require('../models/User');
 const { Club } = require('../models/Club');
 const { randomiseHours } = require('../utils/utils');
-const { clubAddresses } = require('../db/data/addresses');
+const { clubAddresses, userAddresses } = require('../db/data/addresses');
 require('../app');
 
 /**
@@ -19,15 +19,18 @@ const sleep = (ms) => {
 const seedUsers = async () => {
   try {
     const users = [];
-    for (let i = 0; i < 10; i++) {
+    for (let userAddress of userAddresses) {
       users.push(
         new User({
           username: faker.internet.userName(),
           name: faker.name.findName(),
           password: faker.internet.password(),
           address: {
-            buildingNumber: faker.datatype.number(300),
-            postcode: faker.address.zipCode()
+            firstLine: userAddress.firstLine,
+            postcode: userAddress.postcode
+          },
+          location: {
+            type: 'Point'
           },
           imageURL: faker.internet.avatar(),
           email: faker.internet.email(),
@@ -35,10 +38,11 @@ const seedUsers = async () => {
         })
       );
     }
-    users.forEach((user) => {
-      User.create(user);
-    });
-    console.log('Saved!');
+    for (let user of users) {
+      await Promise.all([sleep(1000), User.create(user)]);
+      console.log(user);
+      console.log('Saved users');
+    }
   } catch (error) {
     console.log(error);
   }
@@ -122,5 +126,5 @@ const seedBusinessUsers = async () => {
     console.log(err);
   }
 };
-seedBusinessUsers();
+// seedBusinessUsers();
 seedUsers();
