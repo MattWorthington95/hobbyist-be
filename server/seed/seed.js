@@ -3,8 +3,18 @@ const BusinessUser = require('../models/BusinessUser');
 const User = require('../models/User');
 const { Club } = require('../models/Club');
 const { randomiseHours } = require('../utils/utils');
-const addresses = require('../db/data/addresses');
+const clubAddresses = require('../db/data/addresses');
 require('../app');
+
+/**
+ * Function to prevent 429 Error -
+ *  too many requests per second from OpenStreetMaps API
+ * @param {Number} ms time in milliseconds
+ * @returns {Promise} that resolves after a setTimeout
+ */
+const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
 const seedUsers = async () => {
   try {
@@ -34,7 +44,7 @@ const seedUsers = async () => {
   }
 };
 
-const seedClubs = async () => {
+const seedClubs = async (clubAddress) => {
   const ageGroupArray = [
     'toddler',
     'pre-school',
@@ -54,16 +64,16 @@ const seedClubs = async () => {
       ageGroup: faker.helpers.randomize(ageGroupArray),
       level: faker.helpers.randomize(levelArray),
       price: faker.commerce.price(0, 30, 2),
-      address: {
-        buildingNumber: faker.datatype.number(300),
-        postcode: faker.address.zipCode()
+      address: clubAddress,
+      location: {
+        type: 'Point'
       },
       website: faker.internet.url(),
       clubType: faker.helpers.randomize(['sport', 'art', 'music', 'other']),
       description: faker.lorem.paragraph(),
       hours: randomiseHours()
     });
-    await Club.create(newClub);
+    await Promise.all([sleep(1000), Club.create(newClub)]);
     return newClub;
   } catch (err) {
     console.log(err);
@@ -74,8 +84,8 @@ const seedBusinessUsers = async () => {
   try {
     const businessUsers = [];
 
-    for (let i = 0; i < addresses.length; i++) {
-      const clubData = await seedClubs();
+    for (let clubAddress of clubAddresses) {
+      const clubData = await seedClubs(clubAddress);
       businessUsers.push(
         new BusinessUser({
           username: faker.internet.userName(),
@@ -84,10 +94,7 @@ const seedBusinessUsers = async () => {
           password: faker.internet.password(),
           website: faker.internet.url(),
           name: faker.company.companyName(),
-          address: {
-            firstLine: addresses[i].firstLine,
-            postcode: addresses[i].postcode
-          },
+          address: clubAddress,
           location: {
             type: 'Point'
           },
@@ -106,9 +113,11 @@ const seedBusinessUsers = async () => {
         })
       );
     }
-    businessUsers.forEach((businessUser) => {
-      BusinessUser.create(businessUser);
-    });
+    // using for loop instead of forEach to enable use of async/await
+    for (let businessUser of businessUsers) {
+      await Promise.all([sleep(1000), BusinessUser.create(businessUser)]);
+      console.log('Saved business users');
+    }
   } catch (err) {
     console.log(err);
   }
