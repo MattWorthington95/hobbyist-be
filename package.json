@@ -35,6 +35,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "mongodb-memory-server-core": "^7.4.1",
     "mongoose": "^6.0.5",
     "node-open-geocoder": "^4.0.1"
   }
