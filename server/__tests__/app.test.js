@@ -42,5 +42,33 @@ describe('/api/clubs', () => {
         });
       });
     });
+    it('200: can optionally filter by age group with a valid age group', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?ageGroup=adult')
+        .expect(200);
+
+      expect(body.clubs).toHaveLength(2);
+    });
+    it('200: can optionally filter by level with a valid level query', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?level=all levels')
+        .expect(200);
+
+      expect(body.clubs).toHaveLength(3);
+    });
+    it('200: can optionally filter by maximum price with a valid price', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?price=20')
+        .expect(200);
+
+      expect(body.clubs).toHaveLength(3);
+    });
+    it('200: can optionally filter by days with a valid day', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday')
+        .expect(200);
+
+      expect(body.clubs).toHaveLength(2);
+    });
   });
 });
