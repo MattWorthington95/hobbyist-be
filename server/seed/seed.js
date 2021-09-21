@@ -130,8 +130,9 @@ const seedBusinessUsers = async () => {
 };
 
 const seedData = async () => {
-  await BusinessUser.remove();
-  await User.remove();
+  await BusinessUser.deleteMany();
+  await User.deleteMany();
+  await Club.deleteMany();
 
   const businessUserResponse = await seedBusinessUsers();
   const userResponse = await seedUsers();
