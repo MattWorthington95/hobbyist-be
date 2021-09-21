@@ -1,14 +1,14 @@
 const request = require('supertest');
-const seedData = require('../seed/seed.js');
+//const seedData = require('../seed/seed.js');
 const app = require('../app.js');
 const mongoose = require('mongoose');
 require('jest-sorted');
 
 jest.setTimeout(30000);
 
-beforeEach(() => {
-  return seedData();
-});
+//beforeEach(() => {
+//  return seedData();
+//});
 afterAll(() => mongoose.connection.close());
 
 describe('/api/clubs', () => {
@@ -17,6 +17,7 @@ describe('/api/clubs', () => {
       const { body } = await request(app).get('/api/clubs').expect(200);
 
       expect(body.clubs).toBeInstanceOf(Array);
+      expect(body.clubs).toHaveLength(5);
       body.clubs.forEach((club) => {
         expect(club).toMatchObject({
           clubName: expect.any(String),
