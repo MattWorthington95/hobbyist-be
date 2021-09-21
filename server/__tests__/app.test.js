@@ -11,6 +11,13 @@ beforeEach(() => {
 });
 afterAll(() => mongoose.connection.close());
 
+describe('/not-a-path', () => {
+  it('404: responds with a msg of "Sorry, that is not found" when entered an incorrect path', async () => {
+    const { body } = await request(app).get('/not-a-path').expect(404);
+
+    expect(body.msg).toBe('Sorry, that is not found');
+  });
+});
 describe('/api/clubs', () => {
   describe('/GET', () => {
     it('200: returns an array of objects representing each club', async () => {
