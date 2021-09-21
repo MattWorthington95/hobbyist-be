@@ -11,7 +11,6 @@ const seedUsers = async () => {
     users.push(new User(testUsers[0]));
     for (let user of users) {
       await Promise.all([User.create(user)]);
-      console.log('created user');
     }
   } catch (error) {
     console.log(error);
@@ -22,7 +21,6 @@ const seedClubs = async (club) => {
   try {
     const newClub = await new Club(club);
     await Promise.all([Club.create(newClub)]);
-    console.log('club created');
     return newClub;
   } catch (err) {
     console.log(err);
@@ -40,7 +38,6 @@ const seedBusinessUsers = async () => {
     // using for loop instead of forEach to enable use of async/await
     for (let businessUser of businessUsers) {
       await Promise.all([BusinessUser.create(businessUser)]);
-      console.log('Saved business users');
     }
   } catch (err) {
     console.log(err);
