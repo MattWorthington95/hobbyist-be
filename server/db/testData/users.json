@@ -1,0 +1,18 @@
+[
+  {
+    "address": { "firstLine": "57 Greengage", "postcode": "M13 9GD" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.4656521, -2.2197964],
+      "formattedAddress": "Greengage, Ardwick, Manchester, Greater Manchester, North West England, England, M13 9GD, United Kingdom"
+    },
+    "_id": "6148cd177751719d31eb1154",
+    "username": "Elias72",
+    "name": "Seth Auer",
+    "password": "Tsv6Y34ISmsEx98",
+    "imageURL": "https://cdn.fakercloud.com/avatars/loganjlambert_128.jpg",
+    "email": "Raphaelle.Morar@gmail.com",
+    "age13": true,
+    "__v": 0
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "address": { "firstLine": "2 Booth St E", "postcode": "M13 9SS" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.46952915, -2.2354674415226925],
+      "formattedAddress": "Manchester Aquatics Centre, 2, Booth Street East, Chorlton-on-Medlock, Manchester, Greater Manchester, North West England, England, M13 9SS, United Kingdom"
+    },
+    "hours": {
+      "monday": { "open": null, "close": null },
+      "tuesday": { "open": null, "close": null },
+      "wednesday": { "open": null, "close": null },
+      "thursday": { "open": null, "close": null },
+      "friday": { "open": 20, "close": 24 },
+      "saturday": { "open": null, "close": null },
+      "sunday": { "open": null, "close": null }
+    },
+    "_id": "6148ccf97751719d31eb10cd",
+    "clubName": "Farrell and Sons",
+    "email": "Oleta28@gmail.com",
+    "phoneNumber": 7117792179,
+    "ageGroup": "young adult",
+    "level": "all levels",
+    "price": 28,
+    "website": "http://enrico.biz",
+    "clubType": "other",
+    "description": "Aut excepturi vitae non. Non assumenda ratione sed. Quia itaque incidunt iste. Saepe praesentium temporibus dignissimos ad error quis. Molestias possimus voluptas.",
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Moss Ln E", "postcode": "M15 5NN" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.4599819, -2.2485699],
+      "formattedAddress": "Moss Lane East, Moss Side, Manchester, Greater Manchester, North West England, England, M15 5DD, United Kingdom"
+    },
+    "hours": {
+      "monday": { "open": null, "close": null },
+      "tuesday": { "open": null, "close": null },
+      "wednesday": { "open": null, "close": null },
+      "thursday": { "open": null, "close": null },
+      "friday": { "open": 19, "close": 22 },
+      "saturday": { "open": null, "close": null },
+      "sunday": { "open": null, "close": null }
+    },
+    "_id": "6148ccfa7751719d31eb10d4",
+    "clubName": "Feil - Barrows",
+    "email": "Ed_Hickle@gmail.com",
+    "phoneNumber": 7042356869,
+    "ageGroup": "adult",
+    "level": "intermediate",
+    "price": 9,
+    "website": "http://sammy.info",
+    "clubType": "art",
+    "description": "Est molestias quia sapiente quod magnam qui sequi ducimus. Asperiores iusto nesciunt vel architecto ut. Non dolores et in aperiam non numquam aperiam. Et nulla eum tenetur.",
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Liverpool St", "postcode": "M5 4HU" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.4814165, -2.277516],
+      "formattedAddress": "Liverpool Street, Pendleton, Salford, Greater Manchester, North West England, England, M5 4BD, United Kingdom"
+    },
+    "hours": {
+      "monday": { "open": null, "close": null },
+      "tuesday": { "open": null, "close": null },
+      "wednesday": { "open": null, "close": null },
+      "thursday": { "open": null, "close": null },
+      "friday": { "open": null, "close": null },
+      "saturday": { "open": null, "close": null },
+      "sunday": { "open": 19, "close": 21 }
+    },
+    "_id": "6148ccfb7751719d31eb10db",
+    "clubName": "Collier and Sons",
+    "email": "Kiarra.DAmore@hotmail.com",
+    "phoneNumber": 7056921139,
+    "ageGroup": "adult",
+    "level": "all levels",
+    "price": 17,
+    "website": "http://timmothy.co.uk",
+    "clubType": "music",
+    "description": "Dolorum deleniti atque rerum consectetur a aliquam. Iure et voluptatibus totam quia aut cupiditate et vitae est. Et mollitia dignissimos aliquam. Officia sunt aliquid dolores modi consequatur sit iste nostrum rerum. Quia eaque rerum autem.",
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Great Cheetham St W", "postcode": "M7 2DN" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.5006052, -2.2640235],
+      "formattedAddress": "Great Cheetham Street West, Higher Broughton, Salford, Greater Manchester, North West England, England, M7 2JA, United Kingdom"
+    },
+    "hours": {
+      "monday": { "open": null, "close": null },
+      "tuesday": { "open": null, "close": null },
+      "wednesday": { "open": 20, "close": 22 },
+      "thursday": { "open": null, "close": null },
+      "friday": { "open": null, "close": null },
+      "saturday": { "open": null, "close": null },
+      "sunday": { "open": null, "close": null }
+    },
+    "_id": "6148ccfc7751719d31eb10e2",
+    "clubName": "Gorczany LLC",
+    "email": "Darrick82@hotmail.com",
+    "phoneNumber": 7154196373,
+    "ageGroup": "primary-school",
+    "level": "all levels",
+    "price": 19,
+    "website": "http://aliyah.biz",
+    "clubType": "art",
+    "description": "Ullam in rem dignissimos aut quidem nobis doloribus nesciunt odio. Ea maiores sit velit doloremque sit. Beatae maxime non. Eveniet est enim ipsa ut.",
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Craven Dr", "postcode": "M5 3DJ" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.4700684, -2.280701],
+      "formattedAddress": "Craven Drive, Ordsall, Salford Quays, Salford, Greater Manchester, North West England, England, M5 3FP, United Kingdom"
+    },
+    "hours": {
+      "monday": { "open": null, "close": null },
+      "tuesday": { "open": null, "close": null },
+      "wednesday": { "open": null, "close": null },
+      "thursday": { "open": 11, "close": 14 },
+      "friday": { "open": null, "close": null },
+      "saturday": { "open": null, "close": null },
+      "sunday": { "open": null, "close": null }
+    },
+    "_id": "6148ccfd7751719d31eb10e9",
+    "clubName": "Homenick - Mills",
+    "email": "Samara11@gmail.com",
+    "phoneNumber": 7143138659,
+    "ageGroup": "toddler",
+    "level": "intermediate",
+    "price": 30,
+    "website": "https://colt.name",
+    "clubType": "sport",
+    "description": "Et aperiam excepturi accusamus doloribus. Cum et distinctio quaerat ipsam autem qui velit sapiente. Quasi repudiandae debitis harum est. Enim ex repellat sed eaque. Voluptatum nemo aut ut itaque. In voluptas aut.",
+    "__v": 0
+  }
+]

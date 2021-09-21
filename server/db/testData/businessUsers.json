@@ -1,0 +1,297 @@
+[
+  {
+    "address": { "firstLine": "2 Booth St E", "postcode": "M13 9SS" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.46952915, -2.2354674415226925],
+      "formattedAddress": "Manchester Aquatics Centre, 2, Booth Street East, Chorlton-on-Medlock, Manchester, Greater Manchester, North West England, England, M13 9SS, United Kingdom"
+    },
+    "_id": "6148ccfa7751719d31eb10d0",
+    "username": "Meda_Feeney56",
+    "email": "Amari_Harris@hotmail.com",
+    "phoneNumber": 7296178459,
+    "password": "EotYaCCiiEm1Bs8",
+    "website": "https://desmond.co.uk",
+    "name": "Bartell, Langworth and Beahan",
+    "imageURL": "https://cdn.fakercloud.com/avatars/samihah_128.jpg",
+    "clubs": [
+      {
+        "address": { "firstLine": "2 Booth St E", "postcode": "M13 9SS" },
+        "location": {
+          "type": "Point",
+          "coordinates": [53.46952915, -2.2354674415226925],
+          "formattedAddress": "Manchester Aquatics Centre, 2, Booth Street East, Chorlton-on-Medlock, Manchester, Greater Manchester, North West England, England, M13 9SS, United Kingdom"
+        },
+        "hours": {
+          "monday": { "open": null, "close": null },
+          "tuesday": { "open": null, "close": null },
+          "wednesday": { "open": null, "close": null },
+          "thursday": { "open": null, "close": null },
+          "friday": { "open": 20, "close": 24 },
+          "saturday": { "open": null, "close": null },
+          "sunday": { "open": null, "close": null }
+        },
+        "clubName": "Farrell and Sons",
+        "email": "Oleta28@gmail.com",
+        "phoneNumber": 7117792179,
+        "ageGroup": "young adult",
+        "level": "all levels",
+        "price": 28,
+        "website": "http://enrico.biz",
+        "clubType": "other",
+        "description": "Aut excepturi vitae non. Non assumenda ratione sed. Quia itaque incidunt iste. Saepe praesentium temporibus dignissimos ad error quis. Molestias possimus voluptas.",
+        "_id": "6148ccf97751719d31eb10cd",
+        "__v": 0
+      }
+    ],
+    "reviews": [
+      {
+        "username": "Charlotte.Armstrong",
+        "body": "Quo nemo quis porro incidunt vero architecto qui. Quaerat expedita dicta sunt possimus necessitatibus dolorum. Veniam repellat vitae. Adipisci ea qui quasi debitis illo voluptatem qui. Non est molestiae aut vel aliquam quia eum. Eos dignissimos voluptatem consequatur officia quisquam adipisci ipsam veritatis ullam.",
+        "_id": "6148ccfa7751719d31eb10d2"
+      },
+      {
+        "username": "Elmore_Schoen",
+        "body": "Sed amet deleniti eum dicta nam vel suscipit. Cumque est quam excepturi voluptatum labore. Corporis quidem unde aspernatur. Labore vitae aut. Reprehenderit rerum aspernatur. Vero est quis labore saepe cupiditate et quaerat est consequatur.",
+        "_id": "6148ccfa7751719d31eb10d3"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Moss Ln E", "postcode": "M15 5NN" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.4599819, -2.2485699],
+      "formattedAddress": "Moss Lane East, Moss Side, Manchester, Greater Manchester, North West England, England, M15 5DD, United Kingdom"
+    },
+    "_id": "6148ccfb7751719d31eb10d7",
+    "username": "Garnet23",
+    "email": "Kacie.Braun@hotmail.com",
+    "phoneNumber": 7111812702,
+    "password": "87EuQs5qPpmMqTm",
+    "website": "http://assunta.co.uk",
+    "name": "Hodkiewicz, Brakus and Thompson",
+    "imageURL": "https://cdn.fakercloud.com/avatars/VinThomas_128.jpg",
+    "clubs": [
+      {
+        "address": { "firstLine": "Moss Ln E", "postcode": "M15 5NN" },
+        "location": {
+          "type": "Point",
+          "coordinates": [53.4599819, -2.2485699],
+          "formattedAddress": "Moss Lane East, Moss Side, Manchester, Greater Manchester, North West England, England, M15 5DD, United Kingdom"
+        },
+        "hours": {
+          "monday": { "open": null, "close": null },
+          "tuesday": { "open": null, "close": null },
+          "wednesday": { "open": null, "close": null },
+          "thursday": { "open": null, "close": null },
+          "friday": { "open": 19, "close": 22 },
+          "saturday": { "open": null, "close": null },
+          "sunday": { "open": null, "close": null }
+        },
+        "clubName": "Feil - Barrows",
+        "email": "Ed_Hickle@gmail.com",
+        "phoneNumber": 7042356869,
+        "ageGroup": "adult",
+        "level": "intermediate",
+        "price": 9,
+        "website": "http://sammy.info",
+        "clubType": "art",
+        "description": "Est molestias quia sapiente quod magnam qui sequi ducimus. Asperiores iusto nesciunt vel architecto ut. Non dolores et in aperiam non numquam aperiam. Et nulla eum tenetur.",
+        "_id": "6148ccfa7751719d31eb10d4",
+        "__v": 0
+      }
+    ],
+    "reviews": [
+      {
+        "username": "Jenifer.Osinski73",
+        "body": "Quibusdam voluptatem non ratione. Et id repudiandae voluptatem velit rem deleniti libero autem laudantium. Accusamus fuga quia voluptatum. Et possimus at ut. Quas omnis quia.",
+        "_id": "6148ccfb7751719d31eb10d9"
+      },
+      {
+        "username": "Kim.Flatley",
+        "body": "Hic delectus excepturi hic. Corporis sed quasi vel reprehenderit et. Quod velit perspiciatis. Ducimus animi neque ab molestias ut possimus nemo. Fugit nisi incidunt vel veritatis nobis. Soluta labore voluptas quidem qui ut officia et sit.",
+        "_id": "6148ccfb7751719d31eb10da"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Liverpool St", "postcode": "M5 4HU" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.4814165, -2.277516],
+      "formattedAddress": "Liverpool Street, Pendleton, Salford, Greater Manchester, North West England, England, M5 4BD, United Kingdom"
+    },
+    "_id": "6148ccfc7751719d31eb10de",
+    "username": "Katelynn.West40",
+    "email": "Macy_McCullough@gmail.com",
+    "phoneNumber": 7164505267,
+    "password": "UxolB8IO_Lqu9w3",
+    "website": "http://kaci.com",
+    "name": "Waters and Sons",
+    "imageURL": "https://cdn.fakercloud.com/avatars/madewulf_128.jpg",
+    "clubs": [
+      {
+        "address": { "firstLine": "Liverpool St", "postcode": "M5 4HU" },
+        "location": {
+          "type": "Point",
+          "coordinates": [53.4814165, -2.277516],
+          "formattedAddress": "Liverpool Street, Pendleton, Salford, Greater Manchester, North West England, England, M5 4BD, United Kingdom"
+        },
+        "hours": {
+          "monday": { "open": null, "close": null },
+          "tuesday": { "open": null, "close": null },
+          "wednesday": { "open": null, "close": null },
+          "thursday": { "open": null, "close": null },
+          "friday": { "open": null, "close": null },
+          "saturday": { "open": null, "close": null },
+          "sunday": { "open": 19, "close": 21 }
+        },
+        "clubName": "Collier and Sons",
+        "email": "Kiarra.DAmore@hotmail.com",
+        "phoneNumber": 7056921139,
+        "ageGroup": "adult",
+        "level": "all levels",
+        "price": 17,
+        "website": "http://timmothy.co.uk",
+        "clubType": "music",
+        "description": "Dolorum deleniti atque rerum consectetur a aliquam. Iure et voluptatibus totam quia aut cupiditate et vitae est. Et mollitia dignissimos aliquam. Officia sunt aliquid dolores modi consequatur sit iste nostrum rerum. Quia eaque rerum autem.",
+        "_id": "6148ccfb7751719d31eb10db",
+        "__v": 0
+      }
+    ],
+    "reviews": [
+      {
+        "username": "Edwardo33",
+        "body": "Reprehenderit quisquam minima vero. Deserunt reprehenderit optio inventore. Sit aliquid eveniet optio iusto ullam fugit aut in minima. Autem odit id fugit sit.",
+        "_id": "6148ccfc7751719d31eb10e0"
+      },
+      {
+        "username": "Enos6",
+        "body": "Quidem ab error distinctio fugit. Deserunt ut amet. Provident sapiente voluptas quo et ratione dolorem nesciunt.",
+        "_id": "6148ccfc7751719d31eb10e1"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Great Cheetham St W", "postcode": "M7 2DN" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.5006052, -2.2640235],
+      "formattedAddress": "Great Cheetham Street West, Higher Broughton, Salford, Greater Manchester, North West England, England, M7 2JA, United Kingdom"
+    },
+    "_id": "6148ccfd7751719d31eb10e5",
+    "username": "Alessia_Veum",
+    "email": "Edwina94@gmail.com",
+    "phoneNumber": 7806175921,
+    "password": "BBLhicNIWcMnA_I",
+    "website": "http://katlynn.com",
+    "name": "Wiza - Hilll",
+    "imageURL": "https://cdn.fakercloud.com/avatars/teeragit_128.jpg",
+    "clubs": [
+      {
+        "address": { "firstLine": "Great Cheetham St W", "postcode": "M7 2DN" },
+        "location": {
+          "type": "Point",
+          "coordinates": [53.5006052, -2.2640235],
+          "formattedAddress": "Great Cheetham Street West, Higher Broughton, Salford, Greater Manchester, North West England, England, M7 2JA, United Kingdom"
+        },
+        "hours": {
+          "monday": { "open": null, "close": null },
+          "tuesday": { "open": null, "close": null },
+          "wednesday": { "open": 20, "close": 22 },
+          "thursday": { "open": null, "close": null },
+          "friday": { "open": null, "close": null },
+          "saturday": { "open": null, "close": null },
+          "sunday": { "open": null, "close": null }
+        },
+        "clubName": "Gorczany LLC",
+        "email": "Darrick82@hotmail.com",
+        "phoneNumber": 7154196373,
+        "ageGroup": "primary-school",
+        "level": "all levels",
+        "price": 19,
+        "website": "http://aliyah.biz",
+        "clubType": "art",
+        "description": "Ullam in rem dignissimos aut quidem nobis doloribus nesciunt odio. Ea maiores sit velit doloremque sit. Beatae maxime non. Eveniet est enim ipsa ut.",
+        "_id": "6148ccfc7751719d31eb10e2",
+        "__v": 0
+      }
+    ],
+    "reviews": [
+      {
+        "username": "Elyssa70",
+        "body": "Quia voluptate quam quis qui omnis qui repudiandae. Magni aut possimus earum accusamus eius inventore sunt ut. Voluptatem quia autem quia itaque fuga. Suscipit asperiores magni consequatur nihil impedit dicta corrupti.",
+        "_id": "6148ccfd7751719d31eb10e7"
+      },
+      {
+        "username": "Jovanny_Bashirian",
+        "body": "Animi nemo quidem ratione quo sit dolorem sint minus. Porro molestiae non. Officiis consectetur porro itaque aut dolore est facere aut. Officia veniam adipisci voluptas repellendus adipisci magnam. Hic eum id iusto quia voluptas ut.",
+        "_id": "6148ccfd7751719d31eb10e8"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "address": { "firstLine": "Craven Dr", "postcode": "M5 3DJ" },
+    "location": {
+      "type": "Point",
+      "coordinates": [53.4700684, -2.280701],
+      "formattedAddress": "Craven Drive, Ordsall, Salford Quays, Salford, Greater Manchester, North West England, England, M5 3FP, United Kingdom"
+    },
+    "_id": "6148ccfe7751719d31eb10ec",
+    "username": "Lou_Tremblay",
+    "email": "Rosamond_Jakubowski@hotmail.com",
+    "phoneNumber": 7558758217,
+    "password": "wajUnOwm2IDTRzq",
+    "website": "https://kelvin.biz",
+    "name": "Cassin, Champlin and Feeney",
+    "imageURL": "https://cdn.fakercloud.com/avatars/edkf_128.jpg",
+    "clubs": [
+      {
+        "address": { "firstLine": "Craven Dr", "postcode": "M5 3DJ" },
+        "location": {
+          "type": "Point",
+          "coordinates": [53.4700684, -2.280701],
+          "formattedAddress": "Craven Drive, Ordsall, Salford Quays, Salford, Greater Manchester, North West England, England, M5 3FP, United Kingdom"
+        },
+        "hours": {
+          "monday": { "open": null, "close": null },
+          "tuesday": { "open": null, "close": null },
+          "wednesday": { "open": null, "close": null },
+          "thursday": { "open": 11, "close": 14 },
+          "friday": { "open": null, "close": null },
+          "saturday": { "open": null, "close": null },
+          "sunday": { "open": null, "close": null }
+        },
+        "clubName": "Homenick - Mills",
+        "email": "Samara11@gmail.com",
+        "phoneNumber": 7143138659,
+        "ageGroup": "toddler",
+        "level": "intermediate",
+        "price": 30,
+        "website": "https://colt.name",
+        "clubType": "sport",
+        "description": "Et aperiam excepturi accusamus doloribus. Cum et distinctio quaerat ipsam autem qui velit sapiente. Quasi repudiandae debitis harum est. Enim ex repellat sed eaque. Voluptatum nemo aut ut itaque. In voluptas aut.",
+        "_id": "6148ccfd7751719d31eb10e9",
+        "__v": 0
+      }
+    ],
+    "reviews": [
+      {
+        "username": "Samanta62",
+        "body": "Rerum blanditiis ab at in. Temporibus necessitatibus exercitationem vel aspernatur. Facere repellendus quas id aspernatur repellat et sint.",
+        "_id": "6148ccfe7751719d31eb10ee"
+      },
+      {
+        "username": "Luz_Luettgen",
+        "body": "Odio quas ipsam sit. Minima recusandae esse. Nisi sint placeat eum voluptas. Autem excepturi consequatur tempore ut voluptas dolor. Provident quia hic quis quidem nobis quaerat explicabo. Vel amet expedita.",
+        "_id": "6148ccfe7751719d31eb10ef"
+      }
+    ],
+    "__v": 0
+  }
+]

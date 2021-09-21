@@ -1,14 +1,14 @@
 const request = require('supertest');
-//const seedData = require('../seed/seed.js');
+const seedData = require('../seed/test-seed.js');
 const app = require('../app.js');
 const mongoose = require('mongoose');
 require('jest-sorted');
 
 jest.setTimeout(30000);
 
-//beforeEach(() => {
-//  return seedData();
-//});
+beforeEach(() => {
+  return seedData();
+});
 afterAll(() => mongoose.connection.close());
 
 describe('/api/clubs', () => {
