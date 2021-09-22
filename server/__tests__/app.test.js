@@ -4,8 +4,6 @@ const app = require('../app.js');
 const mongoose = require('mongoose');
 require('jest-sorted');
 
-jest.setTimeout(30000);
-
 beforeEach(() => {
   return seedData();
 });
@@ -155,7 +153,7 @@ describe('/api/clubs', () => {
     });
   });
 });
-describe.only('/api/businessuser/create', () => {
+describe('/api/businessuser/create', () => {
   it('201: created an account', async () => {
     const { body } = await request(app)
       .post('/api/businessuser/create')
