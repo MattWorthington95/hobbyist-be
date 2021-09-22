@@ -5,6 +5,9 @@ exports.handle404s = (req, res, next) => {
 exports.handleMongoErrors = (err, req, res, next) => {
   if (err.reason && err.reason.code === 'ERR_ASSERTION') {
     res.status(400).send({ msg: 'Incorrect data type' });
+  } else if (err._message) {
+    const errored = Object.keys(err.errors)[0];
+    res.status(400).send({ msg: `${errored} validation failed` });
   } else {
     next(err);
   }
@@ -23,4 +26,3 @@ exports.handle500s = (err, req, res, next) => {
 
   res.status(500).send({ msg: 'Internal Server Error' });
 };
-

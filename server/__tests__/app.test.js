@@ -155,3 +155,180 @@ describe('/api/clubs', () => {
     });
   });
 });
+describe.only('/api/businessuser/create', () => {
+  it('201: created an account', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        email: 'Email@provider.com',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(201);
+    expect(body.user).toMatchObject({
+      address: { firstLine: '52 Church Street', postcode: 'M4 1PN' },
+      location: {
+        type: 'Point',
+        coordinates: [53.4829818, -2.2374746],
+        formattedAddress:
+          'Church Street, Northern Quarter, City Centre, Manchester, Greater Manchester, North West England, England, M4 1PN, United Kingdom'
+      },
+      _id: expect.any(String),
+      username: 'Username1',
+      email: 'Email@provider.com',
+      phoneNumber: 7234567891,
+      password: 'Password1',
+      website: 'www.website1.com',
+      name: 'Example',
+      imageURL:
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+      clubs: [],
+      reviews: []
+    });
+  });
+  it('201: still creates a user even if address data is not found by location API', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        email: 'Email@provider.com',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '72 Rainbow Road',
+          postcode: 'M4 RS1'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(201);
+    expect(body.user).toMatchObject({
+      address: {
+        firstLine: '72 Rainbow Road',
+        postcode: 'M4 RS1'
+      },
+      location: {
+        type: 'Point',
+        coordinates: [],
+        formattedAddress: 'None'
+      },
+      _id: expect.any(String),
+      username: 'Username1',
+      email: 'Email@provider.com',
+      phoneNumber: 7234567891,
+      password: 'Password1',
+      website: 'www.website1.com',
+      name: 'Example',
+      imageURL:
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+      clubs: [],
+      reviews: []
+    });
+  });
+  it('400: it should send a bad request error if trying to post a username which already exists', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Garnet23',
+        email: 'Email@provider.com',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('Sorry, user already exists');
+  });
+  it('400: it should send a bad request error if trying to post without all required details', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('email validation failed');
+  });
+  it('400: it should send a bad request error if trying to post with invalid details', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        phoneNumber: 'fkjghdkfjn',
+        email: 'Email@provider.com',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('phoneNumber validation failed');
+  });
+  it('400: it should send a bad request error if trying to post with invalid details', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        phoneNumber: '07293559628',
+        email: 'Email@provider.com',
+        password: 'Password1',
+        website: {},
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('website validation failed');
+  });
+});

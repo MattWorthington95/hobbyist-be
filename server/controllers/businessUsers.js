@@ -54,4 +54,26 @@ exports.postBusinessUserLogin = (req, res, next) => {
   });
 };
 
-exports.postBusinessUserCreate = (req, res, next) => {};
+exports.postBusinessUserCreate = (req, res, next) => {
+  const newUserInfo = req.body;
+  newUserInfo.location = {};
+
+  BusinessUser.findOne({ username: newUserInfo.username })
+    .then((user) => {
+      if (user) {
+        return Promise.reject({
+          status: 400,
+          msg: 'Sorry, user already exists'
+        });
+      } else {
+        const newUser = new BusinessUser(newUserInfo);
+
+        return BusinessUser.create(newUser);
+      }
+    })
+    .then((user) => {
+      console.log(user.email);
+      res.status(201).send({ user });
+    })
+    .catch(next);
+};
