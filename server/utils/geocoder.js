@@ -14,7 +14,7 @@ const geocoder = (document) => {
               coordinates: [],
               formattedAddress: 'None'
             };
-            document.save();
+            document.save({ suppressWarning: true });
           } else if (res[0].display_name) {
             const { lat, lon, display_name } = res[0];
             document.location = {
@@ -22,7 +22,7 @@ const geocoder = (document) => {
               coordinates: [lat, lon],
               formattedAddress: display_name
             };
-            document.save();
+            document.save({ suppressWarning: true });
           }
         } catch (error) {
           console.log(error);
