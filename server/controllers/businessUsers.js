@@ -1,4 +1,5 @@
 const BusinessUser = require('../models/BusinessUser');
+const geocoder = require('../utils/geocoder');
 
 exports.getBusinessUser = (req, res, next) => {
   const { username } = req.params;
@@ -24,13 +25,15 @@ exports.patchBusinessUser = (req, res, next) => {
   const updates = req.body;
 
   BusinessUser.findOneAndUpdate(mongoParams, updates, { new: true })
-    .then((businessUser) => {
-      if (businessUser.length === 0) {
+    .then(async (businessUser) => {
+      if (!businessUser) {
         return Promise.reject({
           status: 400,
           msg: 'Sorry, that is bad request'
         });
       } else {
+        businessUser.location = {};
+        await geocoder(businessUser);
         res.status(200).send({ businessUser });
       }
     })
