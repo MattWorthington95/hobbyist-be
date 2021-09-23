@@ -18,6 +18,9 @@ exports.getClubs = (req, res, next) => {
     if (urlQuery === 'day') {
       const str = `hours.${day}.open`;
       mongoQuery[str] = { $ne: null };
+    } else if (urlQuery === 'time') {
+      const str = `hours.${day}.open`;
+      mongoQuery[str] = { $gte: time };
     } else {
       mongoQuery[urlQuery] = req.query[urlQuery];
     }
@@ -34,7 +37,7 @@ exports.getClubs = (req, res, next) => {
     .catch(next);
 };
 
-const validateQueries = ({ day, price, level, ageGroup, clubType }) => {
+const validateQueries = ({ day, price, level, ageGroup, clubType, time }) => {
   const validDays = [
     'monday',
     'tuesday',
@@ -73,4 +76,11 @@ const validateQueries = ({ day, price, level, ageGroup, clubType }) => {
 
   if (level && !validLevels.includes(level))
     return { status: 400, msg: 'Invalid level' };
+
+  if (time) {
+    if (!day) return { status: 400, msg: 'Must provide a day' };
+    if (time < 0 || time > 24 || typeof +time !== 'number') {
+      return { status: 400, msg: 'Invalid time' };
+    }
+  }
 };

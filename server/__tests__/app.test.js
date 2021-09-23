@@ -109,6 +109,14 @@ describe('/api/clubs', () => {
         expect(club.level).toBe('all levels');
       });
     });
+    it('200: can optionally filter by time when passed a valid day and a valid time', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=20')
+        .expect(200);
+
+      expect(body.clubs).toHaveLength(1);
+      expect(body.clubs[0].hours.friday.open).toBeGreaterThanOrEqual(20);
+    });
     it('400: responds with a bad request message when value passed in as price query is not a number', async () => {
       const { body } = await request(app)
         .get('/api/clubs?price=friday')
@@ -150,6 +158,32 @@ describe('/api/clubs', () => {
         .expect(400);
 
       expect(body.msg).toBe('Invalid level');
+    });
+    it('400: responds with a bad request message when value passed in as time query is invalid type', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=seven')
+        .expect(400);
+
+      expect(body.msg).toBe('Invalid time');
+    });
+    it('400: responds with a bad request message when value passed in as time query is a negative number', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=-3')
+        .expect(400);
+
+      expect(body.msg).toBe('Invalid time');
+    });
+    it('400: responds with a bad request message when value passed in as time query is a number above 24', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=26')
+        .expect(400);
+
+      expect(body.msg).toBe('Invalid time');
+    });
+    it('400: responds with a bad request message if no valid day query is passed in alongside valid time query', async () => {
+      const { body } = await request(app).get('/api/clubs?time=12').expect(400);
+
+      expect(body.msg).toBe('Must provide a day');
     });
   });
 });
