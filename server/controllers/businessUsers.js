@@ -1,4 +1,5 @@
 const BusinessUser = require('../models/BusinessUser');
+const { Club } = require('../models/Club');
 const geocoder = require('../utils/geocoder');
 
 exports.getBusinessUser = (req, res, next) => {
@@ -25,8 +26,9 @@ exports.patchBusinessUser = (req, res, next) => {
   const updates = req.body;
 
   BusinessUser.findOneAndUpdate(mongoParams, updates, { new: true })
+
     .then(async (businessUser) => {
-      if (!businessUser) {
+      if (!businessUser || Object.keys(updates).length === 0) {
         return Promise.reject({
           status: 400,
           msg: 'Sorry, that is bad request'
@@ -38,6 +40,34 @@ exports.patchBusinessUser = (req, res, next) => {
       }
     })
     .catch(next);
+};
+
+exports.postBusinessUserClub = async (req, res, next) => {
+  const { username } = req.params;
+  const mongoParams = { username };
+  const newClubData = req.body;
+
+  try {
+    const businessUserExists = await BusinessUser.findOne(mongoParams);
+    if (!businessUserExists || Object.keys(newClubData) === 0) {
+      return next({
+        status: 400,
+        msg: 'Sorry, that is bad request'
+      });
+    } else {
+      const businessUser = await BusinessUser.findOne(mongoParams);
+      const createdClub = new Club(newClubData);
+
+      businessUser.clubs.push(createdClub);
+
+      await businessUser.save('done');
+      await createdClub.save();
+
+      res.status(201).send({ businessUser });
+    }
+  } catch (err) {
+    next(err);
+  }
 };
 
 exports.postBusinessUserLogin = (req, res, next) => {
@@ -72,7 +102,6 @@ exports.postBusinessUserCreate = (req, res, next) => {
       }
     })
     .then((user) => {
-      console.log(user.email);
       res.status(201).send({ user });
     })
     .catch(next);
@@ -80,7 +109,6 @@ exports.postBusinessUserCreate = (req, res, next) => {
 
 exports.getBusinessUserByClub = (req, res, next) => {
   const { club } = req.params;
-  console.log(club);
 
   const mongoQuery = { clubs: { $elemMatch: { clubName: club } } };
 

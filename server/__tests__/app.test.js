@@ -189,7 +189,7 @@ describe('/api/clubs', () => {
     });
   });
 });
-describe('/api/clubs/:club/businessUser', () => {
+describe('/api/clubs/:club/businessUsers', () => {
   it('200: should return an object on a key of business user, with keys of name and username', async () => {
     const { body } = await request(app)
       .get('/api/clubs/Collier and Sons/businessUser')
@@ -206,10 +206,10 @@ describe('/api/clubs/:club/businessUser', () => {
     expect(body.msg).toBe('Club Not Found');
   });
 });
-describe('/api/businessuser/create', () => {
+describe('/api/businessUsers/create', () => {
   it('201: created an account', async () => {
     const { body } = await request(app)
-      .post('/api/businessuser/create')
+      .post('/api/businessUsers/create')
       .send({
         username: 'Username1',
         email: 'Email@provider.com',
@@ -250,7 +250,7 @@ describe('/api/businessuser/create', () => {
   });
   it('201: still creates a user even if address data is not found by location API', async () => {
     const { body } = await request(app)
-      .post('/api/businessuser/create')
+      .post('/api/businessusers/create')
       .send({
         username: 'Username1',
         email: 'Email@provider.com',
@@ -293,7 +293,7 @@ describe('/api/businessuser/create', () => {
   });
   it('400: it should send a bad request error if trying to post a username which already exists', async () => {
     const { body } = await request(app)
-      .post('/api/businessuser/create')
+      .post('/api/businessusers/create')
       .send({
         username: 'Garnet23',
         email: 'Email@provider.com',
@@ -316,7 +316,7 @@ describe('/api/businessuser/create', () => {
   });
   it('400: it should send a bad request error if trying to post without all required details', async () => {
     const { body } = await request(app)
-      .post('/api/businessuser/create')
+      .post('/api/businessusers/create')
       .send({
         username: 'Username1',
         phoneNumber: '07234567891',
@@ -338,7 +338,7 @@ describe('/api/businessuser/create', () => {
   });
   it('400: it should send a bad request error if trying to post with invalid details', async () => {
     const { body } = await request(app)
-      .post('/api/businessuser/create')
+      .post('/api/businessusers/create')
       .send({
         username: 'Username1',
         phoneNumber: 'fkjghdkfjn',
@@ -361,7 +361,7 @@ describe('/api/businessuser/create', () => {
   });
   it('400: it should send a bad request error if trying to post with invalid details', async () => {
     const { body } = await request(app)
-      .post('/api/businessuser/create')
+      .post('/api/businessusers/create')
       .send({
         username: 'Username1',
         phoneNumber: '07293559628',
