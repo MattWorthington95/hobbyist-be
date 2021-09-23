@@ -49,8 +49,8 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-UserSchema.post('save', function () {
-  geocoder(this);
+UserSchema.post('save', async function () {
+  return await geocoder(this);
 });
 
 const User = mongoose.model('user', UserSchema);

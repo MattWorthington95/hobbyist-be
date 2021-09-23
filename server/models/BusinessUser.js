@@ -53,8 +53,8 @@ const BusinessUserSchema = new mongoose.Schema({
   reviews: [{ username: String, body: String }]
 });
 
-BusinessUserSchema.post('save', function () {
-  geocoder(this);
+BusinessUserSchema.post('save', async function () {
+  return await geocoder(this);
 });
 
 const BusinessUser = mongoose.model('businessUser', BusinessUserSchema);

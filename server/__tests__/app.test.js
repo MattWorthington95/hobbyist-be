@@ -4,7 +4,7 @@ const app = require('../app.js');
 const mongoose = require('mongoose');
 require('jest-sorted');
 
-jest.setTimeout(30000);
+jest.setTimeout(10000);
 
 beforeEach(() => {
   return seedData();
@@ -111,6 +111,14 @@ describe('/api/clubs', () => {
         expect(club.level).toBe('all levels');
       });
     });
+    it('200: can optionally filter by time when passed a valid day and a valid time', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=20')
+        .expect(200);
+
+      expect(body.clubs).toHaveLength(1);
+      expect(body.clubs[0].hours.friday.open).toBeGreaterThanOrEqual(20);
+    });
     it('400: responds with a bad request message when value passed in as price query is not a number', async () => {
       const { body } = await request(app)
         .get('/api/clubs?price=friday')
@@ -153,5 +161,225 @@ describe('/api/clubs', () => {
 
       expect(body.msg).toBe('Invalid level');
     });
+    it('400: responds with a bad request message when value passed in as time query is invalid type', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=seven')
+        .expect(400);
+
+      expect(body.msg).toBe('Incorrect data type');
+    });
+    it('400: responds with a bad request message when value passed in as time query is a negative number', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=-3')
+        .expect(400);
+
+      expect(body.msg).toBe('Invalid time');
+    });
+    it('400: responds with a bad request message when value passed in as time query is a number above 24', async () => {
+      const { body } = await request(app)
+        .get('/api/clubs?day=friday&time=26')
+        .expect(400);
+
+      expect(body.msg).toBe('Invalid time');
+    });
+    it('400: responds with a bad request message if no valid day query is passed in alongside valid time query', async () => {
+      const { body } = await request(app).get('/api/clubs?time=12').expect(400);
+
+      expect(body.msg).toBe('Must provide a day');
+    });
+  });
+});
+describe('/api/clubs/:club/businessUser', () => {
+  it('200: should return an object on a key of business user, with keys of name and username', async () => {
+    const { body } = await request(app)
+      .get('/api/clubs/Collier and Sons/businessUser')
+      .expect(200);
+
+    expect(body.businessUser.name).toBe('Waters and Sons');
+    expect(body.businessUser.username).toBe('Katelynn.West40');
+  });
+  it('404: should return a not found message if entered a club in the parameter which does not exist', async () => {
+    const { body } = await request(app)
+      .get('/api/clubs/not-a-club/businessUser')
+      .expect(404);
+
+    expect(body.msg).toBe('Club Not Found');
+  });
+});
+describe('/api/businessuser/create', () => {
+  it('201: created an account', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        email: 'Email@provider.com',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(201);
+    expect(body.user).toMatchObject({
+      address: { firstLine: '52 Church Street', postcode: 'M4 1PN' },
+      location: {
+        type: 'Point',
+        coordinates: [53.4829818, -2.2374746],
+        formattedAddress:
+          'Church Street, Northern Quarter, City Centre, Manchester, Greater Manchester, North West England, England, M4 1PN, United Kingdom'
+      },
+      _id: expect.any(String),
+      username: 'Username1',
+      email: 'Email@provider.com',
+      phoneNumber: 7234567891,
+      password: 'Password1',
+      website: 'www.website1.com',
+      name: 'Example',
+      imageURL:
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+      clubs: [],
+      reviews: []
+    });
+  });
+  it('201: still creates a user even if address data is not found by location API', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        email: 'Email@provider.com',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '72 Rainbow Road',
+          postcode: 'M4 RS1'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(201);
+    expect(body.user).toMatchObject({
+      address: {
+        firstLine: '72 Rainbow Road',
+        postcode: 'M4 RS1'
+      },
+      location: {
+        type: 'Point',
+        coordinates: [],
+        formattedAddress: 'None'
+      },
+      _id: expect.any(String),
+      username: 'Username1',
+      email: 'Email@provider.com',
+      phoneNumber: 7234567891,
+      password: 'Password1',
+      website: 'www.website1.com',
+      name: 'Example',
+      imageURL:
+        'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+      clubs: [],
+      reviews: []
+    });
+  });
+  it('400: it should send a bad request error if trying to post a username which already exists', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Garnet23',
+        email: 'Email@provider.com',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('Sorry, user already exists');
+  });
+  it('400: it should send a bad request error if trying to post without all required details', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        phoneNumber: '07234567891',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('email validation failed');
+  });
+  it('400: it should send a bad request error if trying to post with invalid details', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        phoneNumber: 'fkjghdkfjn',
+        email: 'Email@provider.com',
+        password: 'Password1',
+        website: 'www.website1.com',
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('phoneNumber validation failed');
+  });
+  it('400: it should send a bad request error if trying to post with invalid details', async () => {
+    const { body } = await request(app)
+      .post('/api/businessuser/create')
+      .send({
+        username: 'Username1',
+        phoneNumber: '07293559628',
+        email: 'Email@provider.com',
+        password: 'Password1',
+        website: {},
+        name: 'Example',
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        },
+        imageURL:
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2670&q=80',
+        clubs: [],
+        reviews: []
+      })
+      .expect(400);
+
+    expect(body.msg).toBe('website validation failed');
   });
 });

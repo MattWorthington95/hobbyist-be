@@ -79,8 +79,8 @@ const ClubSchema = new mongoose.Schema({
   }
 });
 
-ClubSchema.post('save', function () {
-  geocoder(this);
+ClubSchema.post('save', async function () {
+  return await geocoder(this);
 });
 
 const Club = mongoose.model('club', ClubSchema);
