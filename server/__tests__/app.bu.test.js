@@ -89,7 +89,9 @@ describe('/api/users/:username', () => {
 describe('/api/businessUsers/:username', () => {
   describe('/GET', () => {
     it('200: returns an array of objects representing businessUser', async () => {
-      const { body } = await request(app).get('/api/businessUsers/Meda_Feeney56').expect(200);
+      const { body } = await request(app)
+        .get('/api/businessUsers/Meda_Feeney56')
+        .expect(200);
 
       expect(body.businessUser).toBeInstanceOf(Array);
       expect(body.businessUser[0].username).toEqual('Meda_Feeney56');
@@ -118,7 +120,7 @@ describe('/api/businessUsers/:username', () => {
   });
   describe('/PATCH', () => {
     test('PATCH 200: responds with the updates in businessUser', async () => {
-      const updates = { 
+      const updates = {
         email: 'Meda_Feeney56@hotmail.com',
         phoneNumber: 7234543654,
         password: 'somehingNew9'
@@ -143,6 +145,47 @@ describe('/api/businessUsers/:username', () => {
           });
         });
     });
+    it('200: should automatically update the location data when updated with a new address', async () => {
+      const updates = {
+        address: {
+          firstLine: '52 Church Street',
+          postcode: 'M4 1PN'
+        }
+      };
+
+      const { body } = await request(app)
+        .patch('/api/businessUsers/Meda_Feeney56')
+        .send(updates)
+        .expect(200);
+
+      expect(body.businessUser.location).toEqual({
+        type: 'Point',
+        coordinates: [53.4829818, -2.2374746],
+        formattedAddress:
+          'Church Street, Northern Quarter, City Centre, Manchester, Greater Manchester, North West England, England, M4 1PN, United Kingdom'
+      });
+    });
+  });
+});
+
+describe('/api/users/:username', () => {
+  describe('/GET', () => {
+    it('200: returns an array of objects representing user', async () => {
+      const { body } = await request(app).get('/api/users/Elias72').expect(200);
+
+      expect(body.user).toBeInstanceOf(Array);
+      expect(body.user[0].username).toEqual('Elias72');
+      expect(body.user[0]).toMatchObject({
+        address: expect.any(Object),
+        location: expect.any(Object),
+        username: expect.any(String),
+        name: expect.any(String),
+        password: expect.any(String),
+        imageURL: expect.any(String),
+        email: expect.any(String),
+        age13: expect.any(Boolean)
+      });
+    });
     test('Error 400: responds with an error message when passed invalid username', async () => {
       const updates = { 
         email: 'Meda_Feeney56@hotmail.com',
@@ -157,8 +200,14 @@ describe('/api/businessUsers/:username', () => {
           expect(body.msg).toBe('Sorry, that is bad request');
         });
     });
-    test('Error 400:  responds with an error message when malformed body/missing required fields', async () => {
-      const updates = {};
+
+  });
+  describe('/PATCH', () => {
+    test('PATCH 200: responds with the updates in user', async () => {
+      const updates = {
+        address: { firstLine: '7 King St', postcode: 'M2 4DL' },
+        password: 'somehingNew9'
+      };
       await request(app)
         .patch('/api/businessUsers/Meda_Feeney56')
         .send(updates)

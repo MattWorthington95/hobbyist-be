@@ -1,5 +1,6 @@
 const BusinessUser = require('../models/BusinessUser');
 const {Club} = require('../models/Club');
+const geocoder = require('../utils/geocoder');
 
 exports.getBusinessUser = (req, res, next) => {
   const { username } = req.params;
@@ -25,13 +26,16 @@ exports.patchBusinessUser = (req, res, next) => {
   const updates = req.body;
 
   BusinessUser.findOneAndUpdate(mongoParams, updates, { new: true })
-    .then((businessUser) => {
+
+    .then(async (businessUser) => {
       if (!businessUser || Object.keys(updates).length === 0) {
         return Promise.reject({
           status: 400,
           msg: 'Sorry, that is bad request'
         });
       } else {
+        businessUser.location = {};
+        await geocoder(businessUser);
         res.status(200).send({ businessUser });
       }
     })
@@ -81,4 +85,41 @@ exports.postBusinessUserLogin = (req, res, next) => {
   });
 };
 
-exports.postBusinessUserCreate = (req, res, next) => {};
+exports.postBusinessUserCreate = (req, res, next) => {
+  const newUserInfo = req.body;
+  newUserInfo.location = {};
+
+  BusinessUser.findOne({ username: newUserInfo.username })
+    .then((user) => {
+      if (user) {
+        return Promise.reject({
+          status: 400,
+          msg: 'Sorry, user already exists'
+        });
+      } else {
+        const newUser = new BusinessUser(newUserInfo);
+
+        return BusinessUser.create(newUser);
+      }
+    })
+    .then((user) => {
+      console.log(user.email);
+      res.status(201).send({ user });
+    })
+    .catch(next);
+};
+
+exports.getBusinessUserByClub = (req, res, next) => {
+  const { club } = req.params;
+  console.log(club);
+
+  const mongoQuery = { clubs: { $elemMatch: { clubName: club } } };
+
+  BusinessUser.findOne(mongoQuery)
+    .then((businessUser) => {
+      if (!businessUser) return next({ status: 404, msg: 'Club Not Found' });
+      const { name, username } = businessUser;
+      res.status(200).send({ businessUser: { name, username } });
+    })
+    .catch(next);
+};
