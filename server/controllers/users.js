@@ -25,7 +25,7 @@ exports.patchUser = (req, res, next) => {
 
   User.findOneAndUpdate(mongoParams, updates, { new: true })
     .then((user) => {
-      if (user.length === 0) {
+      if (!user || Object.keys(updates).length === 0) {
         return Promise.reject({
           status: 400,
           msg: 'Sorry, that is bad request'
