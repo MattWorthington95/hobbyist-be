@@ -12,9 +12,4 @@ apiRouter.use('/clubs', clubsRouter);
 apiRouter.use('/businessUsers', businessUserRouter);
 apiRouter.use('/users', userRouter);
 
-
-apiRouter.use('/businessuser', businessUserRouter);
-
-apiRouter.use('/user', userRouter);
-
 module.exports = apiRouter;
