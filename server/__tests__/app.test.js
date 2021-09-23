@@ -4,6 +4,8 @@ const app = require('../app.js');
 const mongoose = require('mongoose');
 require('jest-sorted');
 
+jest.setTimeout(10000);
+
 beforeEach(() => {
   return seedData();
 });
@@ -164,7 +166,7 @@ describe('/api/clubs', () => {
         .get('/api/clubs?day=friday&time=seven')
         .expect(400);
 
-      expect(body.msg).toBe('Invalid time');
+      expect(body.msg).toBe('Incorrect data type');
     });
     it('400: responds with a bad request message when value passed in as time query is a negative number', async () => {
       const { body } = await request(app)
@@ -185,6 +187,23 @@ describe('/api/clubs', () => {
 
       expect(body.msg).toBe('Must provide a day');
     });
+  });
+});
+describe('/api/clubs/:club/businessUser', () => {
+  it('200: should return an object on a key of business user, with keys of name and username', async () => {
+    const { body } = await request(app)
+      .get('/api/clubs/Collier and Sons/businessUser')
+      .expect(200);
+
+    expect(body.businessUser.name).toBe('Waters and Sons');
+    expect(body.businessUser.username).toBe('Katelynn.West40');
+  });
+  it('404: should return a not found message if entered a club in the parameter which does not exist', async () => {
+    const { body } = await request(app)
+      .get('/api/clubs/not-a-club/businessUser')
+      .expect(404);
+
+    expect(body.msg).toBe('Club Not Found');
   });
 });
 describe('/api/businessuser/create', () => {

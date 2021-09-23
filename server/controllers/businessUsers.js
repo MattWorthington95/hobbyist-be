@@ -77,3 +77,18 @@ exports.postBusinessUserCreate = (req, res, next) => {
     })
     .catch(next);
 };
+
+exports.getBusinessUserByClub = (req, res, next) => {
+  const { club } = req.params;
+  console.log(club);
+
+  const mongoQuery = { clubs: { $elemMatch: { clubName: club } } };
+
+  BusinessUser.findOne(mongoQuery)
+    .then((businessUser) => {
+      if (!businessUser) return next({ status: 404, msg: 'Club Not Found' });
+      const { name, username } = businessUser;
+      res.status(200).send({ businessUser: { name, username } });
+    })
+    .catch(next);
+};
