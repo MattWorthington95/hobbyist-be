@@ -4,7 +4,8 @@ const {
   getBusinessUser,
   patchBusinessUser,
   postBusinessUserLogin,
-  postBusinessUserCreate
+  postBusinessUserCreate,
+  postBusinessUserClub
 } = require('../controllers/businessUsers');
 const businessUserRouter = express.Router();
 
@@ -14,5 +15,6 @@ businessUserRouter
   .route('/:username')
   .get(getBusinessUser)
   .patch(patchBusinessUser);
+businessUserRouter.route('/:username/clubs').post(postBusinessUserClub);
 
 module.exports = businessUserRouter;
